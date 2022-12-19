@@ -1,25 +1,30 @@
-import asyncio
-
+import pytest
+import json
+from httpx import AsyncClient
 from fastapi.testclient import TestClient 
 from fastapi import status
 from main import app 
 
 client = TestClient(app)
-
+base_url = "http://localhost"
+res = "" 
 data = {
-  "id": "63a08a2d7996ccf443d46ee1",
-  "title": "title-test55",
-  "description": "description-test55"
+  "title": "title-test",
+  "description": "description-test"
 }
 
-def test_create_todo():
-    loop = asyncio.new_event_loop()
-    response = client.post("/todo/", json=data)
-    assert response.status_code == status.HTTP_200_OK
-    loop.close()
+@pytest.mark.anyio
+async def test_create_todo():
+  async with AsyncClient(app=app, base_url=base_url) as ac:
+    response = await ac.post("/todo/", json=data)
+    global res
+    res = response.json()
+    assert response.status_code == 200
 
-def test_get_all_todos():
-    loop = asyncio.new_event_loop()
-    response = client.get('/todo/')
-    assert response.status_code == status.HTTP_200_OK
-    loop.close()    
+@pytest.mark.anyio
+async def test_get_all_todos():
+  async with AsyncClient(app=app, base_url=base_url) as ac:
+    response = await ac.get("/todo/")
+    assert response.status_code == 200
+
+#Complete tests with mongoDB tests
