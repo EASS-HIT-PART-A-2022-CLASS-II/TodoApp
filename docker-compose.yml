@@ -1,0 +1,26 @@
+version: "3.11"
+services:
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    container_name: todo-app-DB
+    networks:
+      - todo-app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    container_name: todo-app-backend
+    networks:
+      - todo-app-network
+
+networks:
+  todo-app-network:
+    driver: bridge
