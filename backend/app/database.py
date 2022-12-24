@@ -3,35 +3,39 @@ from bson.objectid import ObjectId
 
 import motor.motor_asyncio
 
-client = motor.motor_asyncio.AsyncIOMotorClient('mongodb://todo-app-DB', 27017)
+client = motor.motor_asyncio.AsyncIOMotorClient("mongodb://todo-app-DB", 27017)
 
-database = client['todo']
+database = client["todo"]
 
-collection= database.todo
+collection = database.todo
 
-def todo_json(todo)-> dict:
+
+def todo_json(todo) -> dict:
     return {
         "id": str(todo["_id"]),
         "title": todo["title"],
-        "description": todo["description"]
+        "description": todo["description"],
     }
-    
-    
+
+
 async def fetch_all_todos():
     todos = []
     async for todo in collection.find():
         todos.append(todo_json(todo))
     return todos
-    
+
+
 async def fetch_todo(id):
     todo = await collection.find_one({"_id": ObjectId(id)})
     if todo:
         return todo_json(todo)
 
+
 async def create_todo(todo_data: dict) -> dict:
     todo = await collection.insert_one(todo_data)
     new_todo = await collection.find_one({"_id": todo.inserted_id})
-    return todo_json(new_todo)        
+    return todo_json(new_todo)
+
 
 async def update_todo_data(id: str, data: dict):
     todo = await collection.find_one({"_id": ObjectId(id)})
@@ -43,6 +47,7 @@ async def update_todo_data(id: str, data: dict):
             return True
         return False
 
+
 async def delete_todo_data(id: str):
     todo = await collection.find_one({"_id": ObjectId(id)})
     if todo:
@@ -50,3 +55,17 @@ async def delete_todo_data(id: str):
         return True
     return False
 
+
+async def fetch_todo_title_by_id(id):
+    todo = await collection.find_one({"_id": ObjectId(id)})
+    todo_title = todo["title"]
+    if todo_title:
+        return todo_title
+
+
+async def fetch_todo_id_by_title(title):
+    todo = await collection.find_one({"title": title})
+    todo_j = todo_json(todo)
+    todo_id = todo_j["id"]
+    if todo_id:
+        return todo_id
