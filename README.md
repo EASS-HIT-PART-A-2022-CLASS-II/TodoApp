@@ -7,7 +7,7 @@ A to-do list app that helps organize your daily tasks in an orderly and simple w
 ## Technologies
 #### Backend - Using FastAPI
 
-#### Frontend - TBD
+#### Frontend - Using React
 
 #### Database - Using mongoDB
 
@@ -17,5 +17,7 @@ A to-do list app that helps organize your daily tasks in an orderly and simple w
 ```
 sudo docker-compose up -d
 ```
+##### Open the UI : https://localhost:3000
+
 
 
