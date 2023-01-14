@@ -21,6 +21,17 @@ services:
     networks:
       - todo-app-network
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: todo-app-frontend
+    networks:
+      - todo-app-network
+
 networks:
   todo-app-network:
+    name: todo-app-network
     driver: bridge
