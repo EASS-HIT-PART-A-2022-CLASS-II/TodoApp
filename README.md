@@ -25,7 +25,8 @@ sudo docker-compose up -d
 
 
 ## Demo
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/hBFOXVw3jNQ/0.jpg)](https://www.youtube.com/watch?v=hBFOXVw3jNQ)
+[YouTube Link](https://youtu.be/hBFOXVw3jNQ).  
+[![](https://markdown-videos.deta/youtube/hBFOXVw3jNQ)](https://youtu.be/hBFOXVw3jNQ)
 
 
 
