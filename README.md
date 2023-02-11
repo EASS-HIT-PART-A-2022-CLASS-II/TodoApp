@@ -13,11 +13,19 @@ A to-do list app that helps organize your daily tasks in an orderly and simple w
 
 
 ## How to run the project?
-##### Run docker with docker-compose:
+##### Clone the git project:
+```
+git clone https://github.com/EASS-HIT-PART-A-2022-CLASS-II/TodoApp.git
+```
+##### Run the following docker-compose command from TodoApp directory:
 ```
 sudo docker-compose up -d
 ```
 ##### Open the UI : http://localhost:3000
+
+
+## Demo
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/hBFOXVw3jNQ/0.jpg)](https://www.youtube.com/watch?v=hBFOXVw3jNQ)
 
 
 
